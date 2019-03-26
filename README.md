@@ -18,3 +18,5 @@ You can use Geo.dat file from this repository to extract the info, but it's very
  
 You can pre-defined any Black-list website or any phrase of the website name to find out during pcap parsing.
 In this repo, i'm using LOIC phrase[either inside the web search or website name] search or downloaded by the host inside the network, it's low orbit Ion Cannon is used for the creation of the DDoS attack which makes it dangerous for network.
+
+You might have to change the test case location according to your test case location.
