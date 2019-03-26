@@ -46,3 +46,55 @@ for i in range(1,11): # you can put the range accoding to the test case availabi
     f = open(a, 'rb')
     pcap = dpkt.pcap.Reader(f) # read and then parse the Loic test case
     printPcap1(pcap)
+
+    # now DDOS test case
+        def findAttack(pcap):
+        THRESH = 1000 # threshold of DDoS
+        b = 0
+        count = {}
+        count1 = {}
+        for (ts, buf) in pcap:
+            try:
+
+                eth = dpkt.ethernet.Ethernet(buf)
+
+                ip = eth.data
+
+                src = socket.inet_ntoa(ip.src)
+
+                dst = socket.inet_ntoa(ip.dst)
+
+                if src in count:  # add the ip as key and value as number of packet sent from this source
+                    count[src] += 1
+                else:
+                    count[src] = 1
+
+                if dst in count1: # add the ip as a key and value as number of packet destinated for this ip.
+                    count1[dst] += 1
+                else:
+                    count1[dst] = 1
+
+
+            except:
+
+                pass
+
+        print(count)
+        b = str(count[src])
+        print(count1)
+        Attacker = str(max(count, key=count.get))
+
+        if count[src] > THRESH: # if the packet is above threshold value just print the msg with the attacker ip and number of packet
+            print('[+] ' + Attacker + ' initiate the attacke with ' + b + ' packets ')
+        else: # otherwise says it's safe
+            print('Host is Safe!!')
+
+        print(" ")
+
+    #if this pcap file contains the LOIC download then find out either this host part of any DDos or initiate any DDos.
+
+    f = open(b,'rb')
+
+    pcap = dpkt.pcap.Reader(f)
+
+    findAttack(pcap)
